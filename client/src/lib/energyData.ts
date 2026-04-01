@@ -87,7 +87,7 @@ const RAW_DATA = `
 28日1.5度0.82元
 29日1.1度0.6元
 30日1.4度0.77元
-31日-度-元`;
+31日1.5度0.82元`;
 
 export interface ParsedEnergyData {
   year: number;
