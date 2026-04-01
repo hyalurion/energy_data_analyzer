@@ -201,7 +201,7 @@ export default function Home() {
       <div className="container py-4">
         <BatteryFull className="w-8 h-8 text-emerald-500 mx-auto" />
         <p className="text-xl text-emerald-500 font-medium text-center">
-          表内剩余：45度
+          表内剩余：43度
         </p>
       </div>
       {/* 主要内容 */}
@@ -437,7 +437,7 @@ export default function Home() {
           }
         `}</style>
         <div className="container text-center text-muted-foreground text-sm">
-          <p>数据更新：2026年03月30日</p>
+          <p>数据更新：2026年03月31日</p>
         </div>
       </footer>
     </div>
