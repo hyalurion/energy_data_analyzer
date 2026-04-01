@@ -322,6 +322,19 @@ export default function Home() {
               highlight
               color="amber"
             />
+            
+            <div className="glass-card p-6 rounded-2xl">
+              <div className="flex items-center gap-3 mb-3">
+                <TrendingUp className="w-5 h-5 text-green-400" />
+                <h3 className="text-foreground font-semibold">用电范围（度）</h3>
+              </div>
+              <p className="text-2xl font-bold text-green-400 mb-2">
+                {stats.minDailyValue} ~ {stats.maxDailyValue}
+              </p>
+              <p className="text-sm text-muted-foreground">
+                最低：{stats.minDaily}日 | 最高：{stats.maxDaily}日
+              </p>
+            </div>
           </div>
         </section>
 
@@ -443,46 +456,6 @@ export default function Home() {
 
         {/* 渐变分隔线 */}
         <div className="gradient-divider" />
-
-        {/* 数据统计摘要 */}
-        <section className="mb-12">
-          <div className="flex items-center gap-3 mb-6">
-            <BarChart2 className="w-6 h-6 text-blue-400" />
-            <h2 className="text-2xl font-poppins font-bold text-foreground">
-              数据统计摘要
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-card p-6 rounded-2xl">
-              <div className="flex items-center gap-3 mb-3">
-                <Calendar className="w-5 h-5 text-blue-400" />
-                <h3 className="text-foreground font-semibold">数据覆盖（天）</h3>
-              </div>
-              <p className="text-2xl font-bold text-blue-400 mb-2">
-                {stats.daysWithData}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                有数据的天数 / 总共{stats.totalDays}天
-              </p>
-              <p className="text-sm text-muted-foreground/80 mt-2">
-                缺失数据：{stats.daysWithoutData} 天
-              </p>
-            </div>
-
-            <div className="glass-card p-6 rounded-2xl">
-              <div className="flex items-center gap-3 mb-3">
-                <TrendingUp className="w-5 h-5 text-green-400" />
-                <h3 className="text-foreground font-semibold">用电范围（度）</h3>
-              </div>
-              <p className="text-2xl font-bold text-green-400 mb-2">
-                {stats.minDailyValue} ~ {stats.maxDailyValue}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                最低：{stats.minDaily}日 | 最高：{stats.maxDaily}日
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* 详细数据表格 */}
         <section>
