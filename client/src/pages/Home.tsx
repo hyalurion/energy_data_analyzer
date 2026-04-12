@@ -18,6 +18,7 @@ import {
 import { Zap, TrendingUp, Calendar, BatteryFull, PlugZap, ChartLine, BarChart2, Table, AlertCircle } from 'lucide-react';
 import StatCard from '@/components/StatCard';
 import DataTable from '@/components/DataTable';
+import ScrollingBanner from '@/components/ScrollingBanner';
 import {
   getDataByMonth,
   getStatsByMonth,
@@ -29,6 +30,7 @@ import {
   EnergyStats,
 } from '@/lib/energyData';
 import { RAW_DATA } from '@/lib/rawData';
+import { PROMOTIONAL_MESSAGES } from '@/lib/promotionalMessages';
 
 export default function Home() {
   const [records, setRecords] = useState<EnergyRecord[]>([]);
@@ -287,7 +289,7 @@ export default function Home() {
         </div>
       )}
       {/* 主要内容 */}
-      <main className="container py-12">
+      <main className="container py-12 pb-20">
         {/* 统计卡片网格 */}
         <section className="mb-12">
           <h2 className="text-2xl font-poppins font-bold text-blue-400 mb-6">
@@ -470,6 +472,9 @@ export default function Home() {
           </div>
         </section>
       </main>
+
+      {/* 滚动宣传横幅 */}
+      <ScrollingBanner messages={PROMOTIONAL_MESSAGES} />
     </div>
   );
 }
