@@ -470,29 +470,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* 页脚 */}
-      <footer className="py-6 mt-12 backdrop-blur-lg border-t border-slate-200/30">
-        <style>{`
-          footer {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-color: rgba(203, 213, 225, 0.6);
-            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.05);
-          }
-          @media (prefers-color-scheme: dark) {
-            footer {
-              background-color: rgba(15, 23, 42, 0.6);
-              backdrop-filter: blur(12px);
-              -webkit-backdrop-filter: blur(12px);
-              border-color: rgba(100, 116, 139, 0.4);
-              box-shadow: 0 -10px 15px -3px rgba(0, 0, 0, 0.3);
-            }
-          }
-        `}</style>
-        
-      </footer>
     </div>
   );
 }
