@@ -71,6 +71,9 @@ export function parseEnergyData(rawData: string): EnergyRecord[] {
   return result.records;
 }
 
+// 电价常量（元/度）
+export const ELECTRICITY_PRICE = 0.5483;
+
 /**
  * 解析原始数据字符串（包含年月元信息）
  */
@@ -90,19 +93,19 @@ export function parseEnergyDataWithMeta(rawData: string): ParsedEnergyData {
       continue;
     }
 
-    // 匹配格式：01日0.03度0.02元
-    const match = line.match(/(\d{2})日([0-9.-]+)度([0-9.-]+)元/);
+    // 匹配格式：01日0.03度（可能包含充值信息）
+    const match = line.match(/(\d{2})日([0-9.-]+)度/);
     if (match) {
       const day = parseInt(match[1], 10);
       const usageStr = match[2];
-      const costStr = match[3];
 
       // 处理缺失数据（用 "-" 表示）
-      if (usageStr !== '-' && costStr !== '-') {
+      if (usageStr !== '-') {
         const usage = parseFloat(usageStr);
-        const cost = parseFloat(costStr);
 
-        if (!isNaN(usage) && !isNaN(cost)) {
+        if (!isNaN(usage)) {
+          // 费用由用电量 * 电价计算得出
+          const cost = usage * ELECTRICITY_PRICE;
           records.push({
             day,
             usage,
@@ -200,19 +203,19 @@ export function parseEnergyDataByMonth(rawData: string, targetMonth: number): En
 
     // 只处理目标月份的数据
     if (inTargetMonth) {
-      // 匹配格式：01日0.03度0.02元
-      const match = line.match(/(\d{2})日([0-9.-]+)度([0-9.-]+)元/);
+      // 匹配格式：01日0.03度（可能包含充值信息）
+      const match = line.match(/(\d{2})日([0-9.-]+)度/);
       if (match) {
         const day = parseInt(match[1], 10);
         const usageStr = match[2];
-        const costStr = match[3];
 
         // 处理缺失数据（用 "-" 表示）
-        if (usageStr !== '-' && costStr !== '-') {
+        if (usageStr !== '-') {
           const usage = parseFloat(usageStr);
-          const cost = parseFloat(costStr);
 
-          if (!isNaN(usage) && !isNaN(cost)) {
+          if (!isNaN(usage)) {
+            // 费用由用电量 * 电价计算得出
+            const cost = usage * ELECTRICITY_PRICE;
             records.push({
               day,
               usage,
@@ -336,8 +339,8 @@ export function parseRechargeData(rawData: string): RechargeRecord[] {
       continue;
     }
 
-    // 匹配格式：01日0.03度0.02元，充值10度 或 01日0.03度0.02元，充值10.2度
-    const match = line.match(/(\d{2})日[0-9.-]+度[0-9.-]+元.*充值([0-9.]+)度/);
+    // 匹配格式：01日0.03度，充值10度 或 01日0.03度，充值10.2度
+    const match = line.match(/(\d{2})日[0-9.-]+度.*充值([0-9.]+)度/);
     if (match) {
       const day = parseInt(match[1], 10);
       const amount = parseFloat(match[2]);
@@ -376,19 +379,19 @@ export function calculateBatteryInfo(rawData: string): BatteryInfo {
       continue;
     }
 
-    // 匹配格式：01日0.03度0.02元
-    const match = line.match(/(\d{2})日([0-9.-]+)度([0-9.-]+)元/);
+    // 匹配格式：01日0.03度（可能包含充值信息）
+    const match = line.match(/(\d{2})日([0-9.-]+)度/);
     if (match) {
       const day = parseInt(match[1], 10);
       const usageStr = match[2];
-      const costStr = match[3];
 
       // 处理缺失数据（用 "-" 表示）
-      if (usageStr !== '-' && costStr !== '-') {
+      if (usageStr !== '-') {
         const usage = parseFloat(usageStr);
-        const cost = parseFloat(costStr);
 
-        if (!isNaN(usage) && !isNaN(cost)) {
+        if (!isNaN(usage)) {
+          // 费用由用电量 * 电价计算得出
+          const cost = usage * ELECTRICITY_PRICE;
           allRecords.push({
             day,
             usage,
